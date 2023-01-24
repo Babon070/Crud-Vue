@@ -20,7 +20,10 @@ export default createStore({
         addSinglePost(state, payload) {
             return state.posts.unshift(payload);
 
-        }
+        },
+        updateSingliPost(state){
+            return state.posts;
+        },
     },
     
     actions: {
@@ -64,11 +67,22 @@ export default createStore({
             }).catch((error) => console.log(error));
         },
 
-        updatePost(){
-            axios
-                .put("http://94.158.54.194:9092/api/product" + this.$route.params.id, {
-                       
-                })
+        updatePost(context){
+          axios.post('https://example.com/cats', {
+                product_type_id: this.product_type_id,
+                name_uz: this.name_uz,
+                cost: this.cost,
+                address: this.address,
+               })
+              .then(response => {
+                console.log(response);
+                context.commit('updateSingliPost', response.data);
+                alert(111)
+              })
+              .catch(error => {
+                console.log(error);
+              });
+                
 
         }
 
