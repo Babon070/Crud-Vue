@@ -2,7 +2,6 @@
   <div>
     <h1>Post List</h1>
     <router-link class="btn btn-primary" to="/"> Create New Post</router-link>
-    <!-- v-for="post in posts" :key="post" -->
     <div>
       <table class="table table-striped">
         <thead>
@@ -22,7 +21,7 @@
             <td>{{ post.address }}</td>
             <td>
               <button class="btn btn-info mx-2">
-                <router-link class="text-decoration-none" to="/update">
+                <router-link class="text-decoration-none" :to="/update/">
                   Edit Post
                 </router-link>
               </button>
@@ -42,16 +41,15 @@ import { mapGetters } from "vuex";
 export default {
   mounted() {
     this.$store.dispatch("getPosts");
+    
   },
   computed: {
     ...mapGetters(["getPosts"]),
-    // posts() {
-    //   return this.$store.getters.getPosts;
-    // },
   },
   methods: {
-    handleDelete(id) {
-      return this.$store.dispatch("deletePost", id), window.location.reload();
+    handleDelete(name) {
+      return this.$store.dispatch("deletePost", name);
+
     },
   },
 };

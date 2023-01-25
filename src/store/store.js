@@ -15,7 +15,7 @@ export default createStore({
             state.posts = value;
         },
         deleteSinglePost(state) {
-            return state.posts;
+            return state.posts.shift();
         },
         addSinglePost(state, payload) {
             return state.posts.unshift(payload);
@@ -63,12 +63,12 @@ export default createStore({
             }).then((response) => {
                 console.log(response);
                 context.commit("deleteSinglePost");
-                alert(`${payload} deleted?`);
+                confirm(`${payload} deleted?`);
             }).catch((error) => console.log(error));
         },
 
         updatePost(context){
-          axios.post('https://example.com/cats', {
+          axios.post('http://94.158.54.194:9092/api/product', {
                 product_type_id: this.product_type_id,
                 name_uz: this.name_uz,
                 cost: this.cost,
